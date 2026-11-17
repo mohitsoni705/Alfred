@@ -1,3 +1,4 @@
+import type { ComponentRef, Ref } from 'react';
 import {
   Tabs,
   TabList,
@@ -14,6 +15,10 @@ import { Colors, MaxContentWidth, Spacing } from '@/constants/theme';
 import { ExternalLink } from './external-link';
 import { ThemedText } from './themed-text';
 import { ThemedView } from './themed-view';
+
+type TabButtonProps = Omit<TabTriggerSlotProps, 'ref'> & {
+  ref?: Ref<ComponentRef<typeof Pressable>>;
+};
 
 export default function AppTabs() {
   return (
@@ -33,7 +38,7 @@ export default function AppTabs() {
   );
 }
 
-export function TabButton({ children, isFocused, ...props }: TabTriggerSlotProps) {
+export function TabButton({ children, isFocused, ...props }: TabButtonProps) {
   return (
     <Pressable {...props} style={({ pressed }) => pressed && styles.pressed}>
       <ThemedView
